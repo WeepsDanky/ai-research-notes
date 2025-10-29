@@ -31,7 +31,7 @@ RLHF is often complex and unstable. DPO use a mapping between reward functions a
 
 ## 7.3 PPO (Proximal Policy Optimization)
 
-An actor-critic RL algorithm that is widely used. 
+An actor-critic RL algorithm that is widely used. Improved on Trust Region Policy Optimization (TRPO). 
 
 > J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov. Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347, 2017.
 > J. Schulman. Approximating kl divergence, 2020. URL http://joschu.net/blog/kl-app rox.html.
