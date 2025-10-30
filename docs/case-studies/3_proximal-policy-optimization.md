@@ -94,7 +94,11 @@ L^{CLIP}(\theta) = \hat{\mathbb{E}}_t \left[ \min\!\left( r_t(\theta)\hat{A}_t,\
 
 $$
 
-where $\epsilon$ is a hyperparameter (e.g. $\epsilon=0.2$). Second clip term modifies the surrogate objective by clipping the probability ratio, remove the incentive for moving $r_t$ outside of the interval $[1-\epsilon, 1+\epsilon]$. The minimum take whichever is lower from clipped or unclipped objective, only ignore change in probability ratio when it would make objective improve, include it when make objective worse. Therefore $L^{CLIP}(\theta) \approx L^{CPI}(\theta)$ when $r\approx 1$. Figure below plot show probability ratio r is clipped depends on advantage A is positive or negative.
+where $\epsilon$ is a hyperparameter (e.g. $\epsilon=0.2$). Second clip term modifies the surrogate objective by clipping the probability ratio, remove the incentive for moving $r_t$ outside of the interval $[1-\epsilon, 1+\epsilon]$. The minimum take whichever is lower from clipped or unclipped objective, only ignore change in probability ratio when it would make objective improve, include it when make objective worse. Therefore $L^{CLIP}(\theta) \approx L^{CPI}(\theta)$ when $r\approx 1$. Advatage A = Reward R - Value predicted V.
+
+
+
+Figure below plot show probability ratio r is clipped depends on advantage A is positive or negative.
 
 ![PPO Clip function illustration](../images/PPO_clip.png)
 
@@ -134,6 +138,14 @@ $$
 where $c_1, c_2$ are coefficient, $S$ is entropy bonus, and $L_t^{VF}$ is squared error loss $(V_{\theta}(s_t)-V_t^{targ})^2$, V and VF are both value functions. Can be understood as L = Actor - critic + explortaion
 
 > 这他妈啥符号定义 V = VF?
+
+
+| 符号                         | 含义                                        | 是否可计算           | 说明                                                             |
+| :----------------------------- | :-------------------------------------------- | :--------------------- | :----------------------------------------------------------------- |
+| $V_\theta(s_t)$              | 由 critic 网络（value model）预测的状态价值 | ✅（模型输出）       | 需要一个独立网络去预测 value                                     |
+| $V_t^{targ}$                 | “真实”或经验得到的目标值                  | ✅（从奖励序列计算） | 来自实际回报（rollout）或 Generalized Advantage Estimation (GAE) |
+| $(V_\theta - V_t^{targ})^2 $ | 均方误差                                    | ✅                   | 用来训练 value 网络                                              |
+
 
 
 | 模块              | 名称                                         | 数学式                    | 作用                                                   |
