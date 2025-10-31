@@ -22,4 +22,62 @@
 
 ### Group Relative Policy Optimization (GRPO)
 
-To be continued... 
+Same formulation as the DeepSeepMath model. 
+
+### Reward modelling
+
+Reward is source of training signal, decides the optimization direction of RL. A rule based system mainly consists of: 
+(1) Accuracy rewards: evaluates whether the response is correct e.g. for math problems, leetCode
+(2) Format rewards: enforce model to put its thinking process between <think> and </think> tags
+
+Do not apply the outcome or process neural reward in DeepSeek-R1-Zero because it may suffer reward hacking in large scale RL process. Retrain reward model needs additional training resources and complicates the pipeline. 
+
+### Training template
+
+A simple template to adhere to instructions. 
+
+```markdown 
+A conversation between User and Assistant. The user asks a question, and the Assistant solves it. The assistant first thinks about the reasoning process in the mind and then provides the user with the answer. The reasoning process and answer are enclosed within <think> </think> and <answer> </answer> tags, respectively, i.e., <think> reasoning process here </think> <answer> answer here </answer>. User: **prompt**. Assistant:
+``` 
+
+### Performance
+
+Eval on pass@1 and cons@64 score. 
+
+* AIME 2024 benchmark
+* MATH-500
+* GPQA Diamond 
+* LiveCode Bench 
+* CodeForces
+
+## DeepSeep-R1: RL with cold start
+
+Pipeline described in introduction. 
+
+## Distillation
+
+Only apply SFT and do not include an RL stage. 
+
+## Experiment 
+
+Evaluated on MMLU, MMLU-Redux, MMLU-Pro, C-Eval, CMMLU, IFEVal, FRAMES, GPQA Diamon, SimpleQA, C-SimpleAQ, SWE-Bench Verified, Aider, LiveCodeBench, Codeforces, Chinese National High School Mathematics Olympiad, AIME2024. 
+
+Also evaled on open-ended tasks using LLM as judges AlpacaEval 2.0, Arena Hard. 
+
+## Unsuccessful Attempts
+
+### Process Reward Model (PRM) 
+
+PRM is a reasonable method to guide the model toward better approaches for solving reasoning tasks. In practice, three main limitations: 
+(1) Challenging to explicitly define a fine-grain step in general reasoning
+(2) determine whether the current intermediate step is correct is a challenging
+(3) inevitably lead to reward hacking and retrain reward model comlicates the pipeline
+
+### Monte Carlo Tree Search (MCTS)
+
+Inspired by AlphaGo, the method enhance test-time compute by breaking answers into smaller parts to allow the model to explore the solution space systematically. 
+
+We prompt model to generate multiple tags that correspond to specific reasoning steps neccessary for the search. For training, first use collected prompts to find answers via MCTS guided by a pre-trained value model. Then use resulting QA pair to train both actor and value model. 
+
+However, (1) unlike chess the search space is not well defined. Token generation's search space exponentially grow. If set maximum extension limits, easy to stuck in local optima. (2) Train a fine-grained value model is hard. So model limits iterative improve. 
+
