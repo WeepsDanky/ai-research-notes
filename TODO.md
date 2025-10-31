@@ -5,3 +5,4 @@
 - [ ] DeepSeek R1 理解
 - [ ] 自己实现使用 RL Train 一个小模型（Goal/reward 待定）
 - [ ] On Policy Distillation
+- [ ] https://github.com/Infrasys-AI/AIInfra
