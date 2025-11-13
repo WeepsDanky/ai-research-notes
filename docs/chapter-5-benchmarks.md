@@ -1,51 +1,16 @@
 # Benchmarks
 
-## Statistical Metrics
+## Research Metrics 
 
-* Assessing text similarity, intrinsic hallucination
+* HLE (Human's Last Exam)
+* BrowseComp
+* New BrowseComp
+* RACER
+* WISER-Atomic
 
-  * ROGUE [C.-Y. Lin, “ROUGE: A package for automatic evaluation of summaries,” in Text Summarization Branches Out. Barcelona, Spain: Association for Computational Linguistics, Jul. 2004, pp. 74–81. [Online]. Available: https://aclanthology.org/W04-1013]
-  * BLEU [K. Papineni, S. Roukos, T. Ward, and W.-J. Zhu, “Bleu: a method for automatic evaluation of machine translation,” in Proceedings of the 40th Annual Meeting of the Association for Computational Linguistics, P. Isabelle, E. Charniak, and D. Lin, Eds. Philadelphia, Pennsylvania, USA: Association for Computational Linguistics, Jul. 2002, pp. 311318. [Online]. Available: https://aclanthology.org/P02-1040]
-* Advanced Metrics:
+## Agent 
 
-  * PARENT [B. Dhingra, M. Faruqui, A. Parikh, M.-W. Chang, D. Das, and W. Cohen, “Handling divergent reference texts when evaluating table-to-text generation,” in Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, A. Korhonen, D. Traum, and L. Ma`rquez, Eds. Florence, Italy: Association for Computational Linguistics, Jul. 2019, pp. 4884–4895. [Online]. Available: https://aclanthology.org/P19-1483]
-  * PARENT-T [Z. Wang, X. Wang, B. An, D. Yu, and C. Chen, “Towards faithful neural table-to-text generation with content-matching constraints,” in Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, D. Jurafsky, J. Chai, N. Schluter, and J. Tetreault, Eds. Online: Association for Computational Linguistics, Jul. 2020, pp. 1072–1086. [Online]. Available: https: //aclanthology.org/2020.acl-main.101]
-  * Knowledge F1 [H. Song, W.-N. Zhang, J. Hu, and T. Liu, “Generating persona consistent dialogues by exploiting natural language inference,” Proceedings of the AAAI Conference on Artificial Intelligence, vol. 34, no. 05, pp. 8878–8885, Apr. 2020.]
-* **Pass@k**: given a problem, different solutions as code are generated. Designed to test for correctness using different functionality tests. Measures the probability that at least one of the top-$k$ generated code samples for a problem passes all correctness tests.
-
-$$
-\text{Pass@}k :=
-\mathbb{E}_{\text{Problems}}
-\left[
-1 -
-\frac{
-\binom{n - c}{k}
-}{
-\binom{n}{k}
-}
-\right]
-
-$$
-
-where:
-
-* $\mathbb{E}_{\text{Problems}}[\cdot]$ — expectation over all problems in the benchmark dataset;
-* $n$ — total number of code samples generated for a given problem;
-* $c$ — number of those $n$ samples that are **correct** (i.e., pass all test cases);
-* $k$ — number of code samples evaluated or “top-$k$” candidates considered for success;
-* $\binom{n}{k}$ — binomial coefficient, i.e., the number of ways to choose $k$ items from $n$.
-
-> 这个metric不好，正常来说人要求的应该是在一组里选的任何一个都是对的，而不是一组里只有一个对就行。
-
-* Exact Match (EM): exact matches from (pre-defined) answers token by token 
-$$ 
-EM = \frac{M}{N}
-$$
-
-where $M$ is total number of correct answers and $N$ is number of questions. 
-
-* Human Equivalence Score (HEQ): alternative to F1 score， evaluate how LLM answered compare with human's F1 score. 
-
+* Terminal-Bench 2.0 and the Harbor container environment framework
 
 ## Model Based Metrics
 
@@ -103,3 +68,21 @@ where $M$ is total number of correct answers and $N$ is number of questions.
   * M. Chen, J. Tworek, H. Jun, Q. Yuan, H. P. de Oliveira Pinto, J. Kaplan, H. Edwards, Y. Burda, N. Joseph, G. Brockman, A. Ray, R. Puri, G. Krueger, M. Petrov, H. Khlaaf, G. Sastry, P. Mishkin, B. Chan, S. Gray, N. Ryder, M. Pavlov, A. Power, L. Kaiser, M. Bavarian, C. Winter, P. Tillet, F. P. Such, D. Cummings, M. Plappert, F. Chantzis, E. Barnes, A. Herbert-Voss, W. H. Guss, A. Nichol, A. Paino, N. Tezak, J. Tang, I. Babuschkin, S. Balaji, S. Jain, W. Saunders, C. Hesse, A. N. Carr, J. Leike, J. Achiam, V. Misra, E. Morikawa, A. Radford, M. Knight, M. Brundage, M. Murati, K. Mayer, P. Welinder, B. McGrew, D. Amodei, S. McCandlish, I. Sutskever, and W. Zaremba. Evaluating large language models trained on code. CoRR, abs/2107.03374, 2021. URL https://arxiv.org/abs/2107.03374.
 * MBPP
   * J. Austin, A. Odena, M. Nye, M. Bosma, H. Michalewski, D. Dohan, E. Jiang, C. Cai, M. Terry, Q. Le, et al. Program synthesis with large language models. arXiv preprint arXiv:2108.07732, 2021.
+
+## Statistical Metrics
+
+* Assessing text similarity, intrinsic hallucination
+
+  * ROGUE [C.-Y. Lin, “ROUGE: A package for automatic evaluation of summaries,” in Text Summarization Branches Out. Barcelona, Spain: Association for Computational Linguistics, Jul. 2004, pp. 74–81. [Online]. Available: https://aclanthology.org/W04-1013]
+  * BLEU [K. Papineni, S. Roukos, T. Ward, and W.-J. Zhu, “Bleu: a method for automatic evaluation of machine translation,” in Proceedings of the 40th Annual Meeting of the Association for Computational Linguistics, P. Isabelle, E. Charniak, and D. Lin, Eds. Philadelphia, Pennsylvania, USA: Association for Computational Linguistics, Jul. 2002, pp. 311318. [Online]. Available: https://aclanthology.org/P02-1040]
+* Advanced Metrics:
+
+  * PARENT [B. Dhingra, M. Faruqui, A. Parikh, M.-W. Chang, D. Das, and W. Cohen, “Handling divergent reference texts when evaluating table-to-text generation,” in Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, A. Korhonen, D. Traum, and L. Ma`rquez, Eds. Florence, Italy: Association for Computational Linguistics, Jul. 2019, pp. 4884–4895. [Online]. Available: https://aclanthology.org/P19-1483]
+  * PARENT-T [Z. Wang, X. Wang, B. An, D. Yu, and C. Chen, “Towards faithful neural table-to-text generation with content-matching constraints,” in Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, D. Jurafsky, J. Chai, N. Schluter, and J. Tetreault, Eds. Online: Association for Computational Linguistics, Jul. 2020, pp. 1072–1086. [Online]. Available: https: //aclanthology.org/2020.acl-main.101]
+  * Knowledge F1 [H. Song, W.-N. Zhang, J. Hu, and T. Liu, “Generating persona consistent dialogues by exploiting natural language inference,” Proceedings of the AAAI Conference on Artificial Intelligence, vol. 34, no. 05, pp. 8878–8885, Apr. 2020.]
+* **Pass@k**: given a problem, different solutions as code are generated. Designed to test for correctness using different functionality tests. Measures the probability that at least one of the top-$k$ generated code samples for a problem passes all correctness tests.
+
+> 这个metric不好，正常来说人要求的应该是在一组里选的任何一个都是对的，而不是一组里只有一个对就行。
+
+* Exact Match (EM): exact matches from (pre-defined) answers token by token 
+* Human Equivalence Score (HEQ): alternative to F1 score， evaluate how LLM answered compare with human's F1 score. 
